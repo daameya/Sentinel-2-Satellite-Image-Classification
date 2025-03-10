@@ -8,7 +8,7 @@ __version__ = "0.0.0"
 
 REPO_NAME = "Sentinel-2-Satellite-Image-Classification"
 AUTHOR_USER_NAME = "daameya"
-SRC_REPO = "Satellite Image Classification"
+SRC_REPO = "SatelliteImageClassification"
 AUTHOR_EMAIL = "1998ameya@gmail.com"
 
 
