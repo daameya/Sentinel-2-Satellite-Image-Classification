@@ -1,6 +1,19 @@
 # Sentinel-2-Satellite-Image-Classification
 The Sentinel-2 satellite images are openly and freely accessible provided in the Earth observation program Copernicus. We provide benchmarks for this novel dataset with its spectral bands using state-of-the-art deep Convolutional Neural Network (CNNs).
 
+## Workflows
+
+1. Update config.yaml
+2. Update secrets.yaml [Optional]
+3. Update params.yaml
+4. Update the entity
+5. Update the configuration manager in src config
+6. Update the components
+7. Update the pipeline 
+8. Update the main.py
+9. Update the dvc.yaml
+10. app.py
+
 # How to run?
 ### STEPS:
 
