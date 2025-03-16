@@ -2,6 +2,7 @@ from SatelliteImageClassification import logger
 from SatelliteImageClassification.pipeline.stage_01_data_ingestion import DataIngestionTrainingPipeline
 from SatelliteImageClassification.pipeline.stage_02_prepare_base_model import PrepareBaseModelTrainingPipeline
 from SatelliteImageClassification.pipeline.stage_03_model_training import ModelTrainingPipeline
+from SatelliteImageClassification.pipeline.stage_04_model_evaluation import EvaluationPipeline
 
 
 
@@ -37,6 +38,21 @@ try:
    model_trainer = ModelTrainingPipeline()
    model_trainer.main()
    logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
+except Exception as e:
+        logger.exception(e)
+        raise e
+
+
+
+
+STAGE_NAME = "Evaluation stage"
+try:
+   logger.info(f"*******************")
+   logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<")
+   model_evalution = EvaluationPipeline()
+   model_evalution.main()
+   logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
+
 except Exception as e:
         logger.exception(e)
         raise e

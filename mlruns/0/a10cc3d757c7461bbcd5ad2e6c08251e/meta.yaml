@@ -1,0 +1,15 @@
+artifact_uri: file:///D:/Python%20Projects/Sentinel-2-Satellite-Image-Classification/mlruns/0/a10cc3d757c7461bbcd5ad2e6c08251e/artifacts
+end_time: 1742144371205
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: a10cc3d757c7461bbcd5ad2e6c08251e
+run_name: amusing-ape-770
+run_uuid: a10cc3d757c7461bbcd5ad2e6c08251e
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1742144363106
+status: 4
+tags: []
+user_id: 1998a
