@@ -47,31 +47,8 @@ Now,
 open up you local host and port
 ```
 
+### DVC cmd
 
-
-
-
-
-## MLflow
-
-- [Documentation](https://mlflow.org/docs/latest/index.html)
-
-##### cmd
-- mlflow ui
-
-### dagshub
-[dagshub](https://dagshub.com/)
-
-MLFLOW_TRACKING_URI=https://dagshub.com/daameya/Sentinel-2-Satellite-Image-Classification.mlflow \
-MLFLOW_TRACKING_USERNAME=daameya \
-python script.py
-
-Run this to export as env variables:
-
-```bash
-
-export MLFLOW_TRACKING_URI=https://dagshub.com/daameya/Sentinel-2-Satellite-Image-Classification.mlflow
-
-export MLFLOW_TRACKING_USERNAME=daameya 
-
-```
+1. dvc init
+2. dvc repro
+3. dvc dag

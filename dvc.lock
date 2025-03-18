@@ -1,0 +1,113 @@
+schema: '2.0'
+stages:
+  data_ingestion:
+    cmd: python src/SatelliteImageClassification/pipeline/stage_01_data_ingestion.py
+    deps:
+    - path: config/config.yaml
+      hash: md5
+      md5: 816e944079ab48845db5eba18e4a78fe
+      size: 588
+    - path: src/SatelliteImageClassification/pipeline/stage_01_data_ingestion.py
+      hash: md5
+      md5: e21c76dd855fca51c1befc2d85efc25b
+      size: 951
+    outs:
+    - path: artifacts/data_ingestion/EuroSAT
+      hash: md5
+      md5: bff43f93e1bb7c85d1021434eb407e8a.dir
+      size: 91844360
+      nfiles: 27000
+  prepare_base_model:
+    cmd: python src/SatelliteImageClassification/pipeline/stage_02_prepare_base_model.py
+    deps:
+    - path: config/config.yaml
+      hash: md5
+      md5: 816e944079ab48845db5eba18e4a78fe
+      size: 588
+    - path: src/SatelliteImageClassification/pipeline/stage_02_prepare_base_model.py
+      hash: md5
+      md5: 27565f466b7690093164b73b0fdc20b5
+      size: 1044
+    params:
+      params.yaml:
+        CLASSES: 10
+        IMAGE_SIZE:
+        - 64
+        - 64
+        - 3
+        INCLUDE_TOP: false
+        LEARNING_RATE: 0.01
+        WEIGHTS: imagenet
+    outs:
+    - path: artifacts/prepare_base_model
+      hash: md5
+      md5: aa6a511a058ef4e6ad2eafdac35350f5.dir
+      size: 117935776
+      nfiles: 2
+  training:
+    cmd: python src/SatelliteImageClassification/pipeline/stage_03_model_training.py
+    deps:
+    - path: artifacts/data_ingestion/EuroSAT
+      hash: md5
+      md5: bff43f93e1bb7c85d1021434eb407e8a.dir
+      size: 91844360
+      nfiles: 27000
+    - path: artifacts/prepare_base_model
+      hash: md5
+      md5: aa6a511a058ef4e6ad2eafdac35350f5.dir
+      size: 117935776
+      nfiles: 2
+    - path: config/config.yaml
+      hash: md5
+      md5: 816e944079ab48845db5eba18e4a78fe
+      size: 588
+    - path: src/SatelliteImageClassification/pipeline/stage_03_model_training.py
+      hash: md5
+      md5: 64a62225844377ad07b0a92b6e4cae02
+      size: 972
+    params:
+      params.yaml:
+        AUGMENTATION: true
+        BATCH_SIZE: 16
+        EPOCHS: 2
+        IMAGE_SIZE:
+        - 64
+        - 64
+        - 3
+    outs:
+    - path: artifacts/training/model.h5
+      hash: md5
+      md5: 21a790831963325f4c027f96ac40ffc5
+      size: 59099952
+  evaluation:
+    cmd: python src/SatelliteImageClassification/pipeline/stage_04_model_evaluation.py
+    deps:
+    - path: artifacts/data_ingestion/EuroSAT
+      hash: md5
+      md5: bff43f93e1bb7c85d1021434eb407e8a.dir
+      size: 91844360
+      nfiles: 27000
+    - path: artifacts/training/model.h5
+      hash: md5
+      md5: 21a790831963325f4c027f96ac40ffc5
+      size: 59099952
+    - path: config/config.yaml
+      hash: md5
+      md5: 816e944079ab48845db5eba18e4a78fe
+      size: 588
+    - path: src/SatelliteImageClassification/pipeline/stage_04_model_evaluation.py
+      hash: md5
+      md5: 2b845227a7e7c5b1b37d8711f8554e1c
+      size: 969
+    params:
+      params.yaml:
+        BATCH_SIZE: 16
+        IMAGE_SIZE:
+        - 64
+        - 64
+        - 3
+    outs:
+    - path: scores.json
+      hash: md5
+      md5: fee25fea35f54e0698c9270d0784b7e7
+      size: 72
